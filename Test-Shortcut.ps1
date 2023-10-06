@@ -29,7 +29,7 @@
   }
 
   # Remove all broken links in the recents folder that point to the I or H drive
-Test-Shortcut -path "${en:USERPROFILE}\AppData\Roaming\Microsoft\Windows\Recent" |
+Test-Shortcut -path "${env:USERPROFILE}\AppData\Roaming\Microsoft\Windows\Recent" |
     Where-Object { $_.IsWorking -eq $false} |
     Where-Object { $_.Location.Length -gt 0 } |
     Where-Object { $_.Location.StartsWith('I:\') -or $_.Location.StartsWith('H:\') } |
