@@ -1,8 +1,7 @@
 ﻿Function Test-Shortcut
 {
     [CmdletBinding()]
-	Param
-    (
+	Param (
         [Parameter(Mandatory=$True, HelpMessage="Please enter Path of Shortcut, Example c:\folder", Position=1)]
         [string] $path
     )
@@ -10,14 +9,12 @@
     $ErrorActionPreference =' Silentlycontinue'
 
     $Shortcuts = Get-ChildItem -Recurse $path -Include *.lnk -Force
-    $Shell = New-Object -ComObject WScript.Shell
+    $Shell     = New-Object -ComObject WScript.Shell
 
-    Foreach ($Shortcut in $Shortcuts)
-    {
+    foreach ($Shortcut in $Shortcuts) {
         $checks = $shell.CreateShortcut($Shortcut).TargetPath   
      
-        Foreach($check in $checks)
-        {
+        foreach($check in $checks) {
             [Pscustomobject]@{ 
                 IsWorking        = Test-Path $($check)
                 Shortcut         = $Shortcut.name
